@@ -808,8 +808,9 @@ Via Python 🐍 c'est facile !
 
 ```python
 import json
-data = {}
-serialized = json.dump(data)
+data = dict(name="jean", age=1)
+serialized = json.dumps(data)
+# serialized is now a string
 ```
 
 ]
@@ -817,10 +818,10 @@ serialized = json.dump(data)
 
 ```python
 import json
-serialized = '{name: "basile marchand", ...}'
-data = json.load(serialized)
+serialized = '{"name": "jean", "age": 1}'
+data = json.loads(serialized)
+# data is now a dictionary
 ```
-
 ]
 ]
 
@@ -828,23 +829,30 @@ data = json.load(serialized)
 
 # Haut niveau : la couche 7 du modèle OSI
 
-C'est là que les choses concrête commencent 🥳
+C'est là que les choses concrètes commencent 🥳
 <br><br><br>
 .center[***Couche 7 = couche Application***]
 <br><br><br>
 Chaque "catégorie" d'application spécifie alors :
 
-.center[Comment se font les communication entre le client et l'application
+.center[Comment se font les communications entre le client et l'application
 <br><br>
 format des message, contenu attendu, ... ]
 
-On parle de protocole :
+.cols[
+.fifty[
+On parle de protocole, comme par exemple:
 
-- Transfert de fichiers 📂 : (S)FTP
-
+- Transfert de fichiers 📂 : (S)FTP, rsync
 - Messagerie ✉️ : SMTP, POP, IMAP
-
 - Sessions distantes : telnet, SSH
+- et
+]
+.fifty[
+
+  <img src="https://media1.tenor.com/m/qRpNbT_IhBAAAAAd/appurajosh-appu.gif" height="200px">
+]
+]
 
 ---
 
@@ -862,14 +870,16 @@ Format d'une requête
 
 Vous avez peut être remarqué le `GET`dans la requête précédente.
 
-En gros c'est pour dire que l'on veut faire un requête de type `GET`. Sous-entendu il existe d'autre type de requête ... dans le monde HTTP(S) il existe
+En gros c'est pour dire que l'on veut faire un requête de type `GET`. Sous-entendu il existe d'autre types de requête ...
+<br> dans le monde HTTP(S) il existe:
 
 - `GET` : requêtes pour **_obtenir_** du serveur une ressource (fichier html/css/js, image, video, données, ...)
 - `POST` : requêtes pour **_envoyer_** des données au serveur en vu d'un traitement (ajout d'un utilisateur dans une base de données, ...)
 - `PATCH` : requêtes pour **_modifier partiellement_** une ressource du serveur (mettre à jour l'addresse mail d'un utilisateur dans la base de données)
 - `DELETE` : requêtes pour **_supprimer_** une ressource du serveur (supprimer un commentaire sur un article, ... )
 
-Il s'agit là des principaux types de requêtes mais il en existe d'autre, pour la liste complète vous pouvez faire un tour [https://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol](https://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol).
+Il s'agit là des principaux types de requêtes mais il en existe d'autres, pour la liste complète vous pouvez faire un tour ici
+<https://fr.wikipedia.org/wiki/Hypertext_Transfer_Protocol>
 
 .center[
 ⚠️ Il arrive souvent que `POST` soit utilisée, à la place de `PATCH`, <br> pour mettre à jour une donnée déjà présente côté serveur ... 🤢
@@ -885,11 +895,13 @@ Dans Python 🐍 vous vous en doutez il existe tout ce qu'il faut !!
 import requests
 ```
 
-Nous allons utiliser le site [http://httpbin.org](http://httpbin.org) qui met à disposition un serveur de test relativement utile.
+Nous allons utiliser le site <http://httpbin.org> qui met à disposition un serveur de test relativement utile.
 
 .center[
+le dossier `python/httpbin-client` du cours
+<br>ou<br>
 [http://bit.ly/3XmaLNE](http://bit.ly/3XmaLNE)
-<br> or <br>
+<br> ou <br>
 <img src="static/media/qrcode/reqests_qrcode.png" width="20%">
 ]
 
@@ -904,12 +916,15 @@ Lorsque l'on fait une requête à un serveur via http/https ce dernier nous renv
 <br>
 Voici un extrait non complet des codes possibles :
 
-- 200 : ok tout s'est bien passé ✅
-- 301/302 : redirection de la page ⤴️
-- 401 : il faut s'authentifier 🔐
-- 403 : minute papillon tu n'as pas le droit d'accéder à ça ! ⛔
-- 404 : ce que tu me demande n'existe pas ⁉️
-- 5XX : la c'est un problème de serveur 💣
+- 2xx : ok tout s'est bien passé ✅
+  - normalement 200
+- 3xx : redirect
+  - 301/302 : redirection de la page, temporaire ou pas ⤴️
+- 4xx: erreur
+  - 401 : il faut s'authentifier 🔐
+  - 403 : minute papillon tu n'as pas le droit d'accéder à ça ! ⛔
+  - 404 : ce que tu me demandes n'existe pas ⁉️
+- 5xx : la c'est un problème de serveur 💣
 
 Et donc la première chose à faire lorsque vous faites une requête à un serveur c'est de vérifier que le code de retour est bien 200 car sinon pas la peine de continuer !
 
@@ -921,7 +936,7 @@ Et donc la première chose à faire lorsque vous faites une requête à un serve
 
 Permet de définir comment un programme **consommateur** va pouvoir exploiter les **fonctionnalités** données d'un programme **fournisseur**
 
-Dans le domaine particulier du Web l'API se définit en fait à partir d'une URL. En effet l'accès à la ressource se fait en effectuant une requête GET sur un url particulière.
+Dans le domaine particulier du Web l'API se définit en fait à partir d'une URL. En effet l'accès à la ressource se fait en effectuant une requête GET (ou POST, selon les cas) sur un url particulière.
 
 --
 
@@ -1025,14 +1040,25 @@ Donc pour conclure sur les API, il s'agit d'un moyen très simple pour offrir un
 
 On trouve en ligne plein d'API ouverte un lien pour avoir une liste non exhaustive
 
+.cols[
+
+.fifty[
 .center[
 [https://github.com/public-apis/public-apis](https://github.com/public-apis/public-apis)<br>
 ou <br>
 [http://bit.ly/3YHC1qX](http://bit.ly/3YHC1qX) <br>
 ou <br>
-<img src="static/media/qrcode/public_api_qr.png" width="20%">
+<img src="static/media/qrcode/public_api_qr.png" width="40%">
+]
 ]
 
+.fifty[
+.center[
+notamment un exemple d'API utile<br> <https://adresse.data.gouv.fr/outils/api-doc/adresse>
+]
+]
+
+]
 ---
 
 # Illustration
@@ -1045,10 +1071,11 @@ Considérons par exemple le cas d'un serveur générant des listes de nombres al
 - ...
 
 .center[
+le dossier `python/api-random` du cours
+<br>ou<br>
 [http://bit.ly/3HONIFN](http://bit.ly/3HONIFN)
 <br> ou <br>
 <img src="static/media/qrcode/random_number.png" width="20%">
-
 ]
 
 ---
@@ -1157,6 +1184,5 @@ class: middle, center
 ## On passe du côté obscur <br> et on voit comment définir nos API
 
 .center[
-
 <iframe src="https://giphy.com/embed/6x4CLjC8KofaU" width="469" height="380" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 ]
