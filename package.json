@@ -13,7 +13,7 @@
   },
   "description": "les slides du cours réseau / backend à l'École des Mines de Paris",
   "dependencies": {
-    "esbuild": "^0.18.20",
+    "esbuild": "^0.25.0",
     "fsevents": "^2.3.3",
     "nanoid": "^3.3.8",
     "picocolors": "^1.1.1",
