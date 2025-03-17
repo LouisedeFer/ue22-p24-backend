@@ -134,9 +134,9 @@ C'est l'application (au sens logiciel) qui va s'occuper de
 
 .center[**Recevoir**, **Traiter** et **Répondre** aux requètes HTTP (ou autres d'ailleurs)]
 
-Différentes solutions : Apache (40%), Nginx (20%), IIS (10%), ...
+Différentes solutions : Nginx (33%), Apache (27%), LiteSpeed (15%), Node.js(4%), IIS (4%), ...
 
-.footnote[Source : [https://fr.hostadvice.com/marketshare/server/](https://fr.hostadvice.com/marketshare/server/) ]
+.footnote[Source : [https://w3techs.com/technologies/overview/web_server](https://w3techs.com/technologies/overview/web_server) ]
 
 ---
 
@@ -173,7 +173,7 @@ le "routage" entre les deux sites se fait au niveau du Header `Host:` de la requ
 
 ]
 
-.center[**_Un serve rless est un serveur qui n'attend pas_**]
+.center[**_Un serverless est un serveur qui n'attend pas_**]
 
 Le principe est de découper le traitement en petites **tâches indépendantes** (fonctions) qui seront exécutées **à la demande**
 
@@ -273,6 +273,7 @@ Coût plus faible pour les fournisseurs car ils peuvent optimiser l'utilisation 
 - GitLab Pages
 - Netlify
 - Vercel
+- Surge 
 - ...
 
 ]
@@ -373,29 +374,29 @@ puis ouvrez dans votre navigateur `http://localhost:8000/index.html` (*)
 
 .cols[
 
-.fourty[
-  On peut aussi le faire "à la main" en Python 🐍
+.fourty.small[
+  On peut aussi écrire le serveur "à la main" en Python 🐍
 
-  📢 ⚠️ On regarde le fichier `minimal_server.py`
+  📢 ⚠️ On regarde le fichier `server1_static.py`
 
   ```bash
-  $ cd python/http
-  $ python minimal_server.py
+  $ cat python/http/server1_static.py
   ```
 ]
 
-.sixty[
+.sixty.small[
 
-```python
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+  ```python
+  from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-handler = SimpleHTTPRequestHandler
+  handler = SimpleHTTPRequestHandler
 
-print("Open this in your browser:\nhttp://localhost:9000/index.html")
+  print("Open this in your browser:\nhttp://localhost:9000/index.html")
 
-httpd = HTTPServer(('', 9000),  handler)
-httpd.serve_forever()
-```
+  httpd = HTTPServer(('', 9000),  handler)
+  httpd.serve_forever()
+  ```
+
 ]
 
 ]
@@ -421,24 +422,35 @@ Le fonctionnement interne d'un serveur HTTP est assez simple
 5. **Envoyer** la réponse
 6. **Fermer** la connexion
 
-Le point important est la transition entre les étapes 3 et 4 qui est le coeur du serveur HTTP
-car définit la manière dont le serveur va traiter la requête.
+Le point important est la transition entre les étapes 3 et 4 qui est le coeur du serveur HTTP  
+car il définit la manière dont le serveur va traiter la requête.
 
 ---
 
-# Exemple fait à la main
+# Exemples fait à la main
 
-.center[
+📢 ⚠️ dans le dossier `python/http`, on regarde les fichiers:
+
+- `server2_static_byhand.py`
+  - en gros, mêmes fonctions: sait répondre à GET pour les fichiers statiques
+  - mais écrit "à la pogne"
+    <br><br>
+- `server3_post_stateful.py`
+  - le serveur est STATEFUL (il se souvient de l'état) - voir la variable `STATE`  
+    (NB: dans la vraie vie bien sûr, l'état sera stocké dans une database SQL - ou autre)
+  - le POST: les affectations var=value sont mémorisées
+  - le GET: quel que soit le PATH, affiche en html le contenu des données connues (et autres détails)
+    <br><br>
+- `server4_template.py`
+  - mêmes fonctionnalités mais avec un template JINJA2
+
+tout cela est un peu fastidieux, c'est pourquoi on utilise des frameworks (-> slides suivants)  
+mais c'est bien de comprendre comment ça marche  
+à retenir tout de même: cette histoire de templates; on en reparlera
+
+<!-- pour info, était aussi dispo sur replit ici:
 [http://bit.ly/3EeuLLo](http://bit.ly/3EeuLLo)
-]
-
-.center[
-<img src="static/media/qrcode/http_server.png" width="20%">
-]
-
-📢 ⚠️ On regarde les fichiers `more_advance_server.py` et `more_more_advance_server.py`  
-
-ou aussi dispo dans le dossier `python/http`
+<img src="static/media/qrcode/http_server.png" width="20%"> -->
 
 ---
 
