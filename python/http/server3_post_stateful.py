@@ -1,6 +1,7 @@
 """
 This server is stateful, it keeps the data in a global variable STATE.
 - one can record var=value using a POST request to /api/register
+ex: curl http://localhost:9002/api/register -d '{"k1":"v1"}'
 - a GET (on any path) will display the current state as HTML
 """
 
