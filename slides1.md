@@ -574,8 +574,6 @@ Le choix de l'application avec laquelle on va discuter implique la notion de **_
 
 .center[ port = porte d'entrée du service 🚪]
 
-Sur une machine on a 2<sup>16</sup> = 65,536
-
 .center[(mais on ne fait pas tourner autant d'applications sur un serveur)]
 ]
 .twenty-five[
@@ -583,14 +581,38 @@ Sur une machine on a 2<sup>16</sup> = 65,536
 ]
 ]
 
-<img src="static/media/packet-layers.svg" width="100%" style="margin-top: -30px">
+---
 
+# Les ports standard
 
---
+.cols[
 
+.fifty[
+
+Sur une machine on a 2<sup>16</sup> = 65,536 ports
+]
+
+.fifty[
 Quelques port normalisés :
 
-.center[22 : SSH, 25 : SMTP, 53: DNS, 80 : HTTP, 443 : HTTPS]
+service | port
+-|-
+SSH | 22
+SMTP | 25
+DNS | 53
+HTTP | 80
+HTTPS | 443
+... | ...
+]
+]
+
+<br>
+
+et voici à quoi ressemble un paquet:
+
+<br>
+
+<img src="static/media/packet-layers.svg" width="100%" style="margin-top: -30px">
 
 ---
 
@@ -637,7 +659,7 @@ de la manière suivante :
   <br><br>
 
   ]
-  ]
+]
 
 ---
 
@@ -646,7 +668,7 @@ de la manière suivante :
 ## TCP/IP : close
 
 .cols[
-.fifty[
+.fourty[
 
 <img src="static/media/tcp-close.svg" style="width: 75%">
 
