@@ -40,8 +40,7 @@ def click_count():
         resp.set_cookie('sessionId', str(last_session_id))
         return resp 
     
-SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = os.urandom(32)
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
