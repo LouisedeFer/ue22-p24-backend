@@ -850,7 +850,7 @@ pour garantir la sécurité de l'utilisateur
 En pratique le chiffrement fonctionne avec un système clé publique/clé privée
 
 .center[
-<img src="static/media/timeline-tls.svg" height="480px">
+<img src="static/media/timeline-tls.excalidraw.svg" height="480px">
 ]
 
 ---
