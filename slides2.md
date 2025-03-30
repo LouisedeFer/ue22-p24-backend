@@ -671,16 +671,12 @@ L'api du backend doit **impérativement** respecter les routes documentées dans
 
 - on peut lancer l'application avec `python app.py`; ça marche...  
 -  **MAIS** il faut relancer le tout à chaque modification (très sous-optimal)
--  du coup il vaut mieux faire
+-  du coup il vaut mieux activer le mode debug en lançant
   ```bash
-  flask run
+  flask [--app mon_fichier] run --debug
   ```
-  pour avoir un serveur de développement qui se relance tout seul à chaque modification du code
-- et aussi, lorsqu'on est en mode développement, on peut activer le mode `debug` avec
-  ```bash
-  flask run --debug
-  ```
-  qui présente un avantage supplémentaire: les erreurs s'affichent dans le browser plutôt que dans le terminal  
+  qui permet d'avoir un serveur de développement qui se relance tout seul à chaque modification du code,
+  et présente en outre un avantage supplémentaire: les erreurs s'affichent dans le browser plutôt que dans le terminal  
   (notez que c'est néfaste en production, car ça peut donner des informations sensibles sur le code)
 
 .footnote.small[
