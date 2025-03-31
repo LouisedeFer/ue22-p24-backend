@@ -875,6 +875,8 @@ Aucun intérêt fonctionnel. En revanche utile pour la sécurité 🚨 et se pr�
 <br><br>
 .center[**C**ross **S**ite **R**equest **F**orgery]
 
+Et ça demande de définir une clé secrete
+ `app.config['SECRET_KEY'] = os.urandom(32))`
 ]
 ]
 
@@ -889,18 +891,28 @@ On peut directement réutiliser la classe `LoginForm` dans nos fonctions handler
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        "Log in requested for {form.username.data} with passord {form.password.data}")
+        print(f"Log in requested for {form.username.data} with password {form.password.data}")
         ## Add function here to check password
 
         return redirect("/home")
     return render_template("login.html", form=form)
 ```
+.cols[
+.fifty[
 
+Remarques
+- login.html dois être dans un répertoire `/templates`
+- son extension doit être .html, .htm, .xml, .xhtml, ou .svg
 
+  ]
+
+.fifty[
 .center[
 [http://bit.ly/3JyTBb2](http://bit.ly/3JyTBb2)
 
 <img src="static/media/qrcode/flask_form.png" width="20%">
+]
+]
 ]
 
 ---
