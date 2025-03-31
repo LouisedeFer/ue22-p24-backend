@@ -577,7 +577,7 @@ Le choix de l'application avec laquelle on va discuter implique la notion de **_
 .center[(mais on ne fait pas tourner autant d'applications sur un serveur)]
 ]
 .twenty-five[
-<img src="static/media/address-ports-bound.svg" width="100%">
+<img src="static/media/address-ports-bound.excalidraw.svg" width="100%">
 ]
 ]
 
